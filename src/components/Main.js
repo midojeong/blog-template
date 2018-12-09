@@ -8,10 +8,12 @@ import {
 export class Main extends React.Component {
 
   render(){
+    const passThroughProps = this.props;
+    
     return (
       <Router>  
         <>
-          <Route path="/article/:id" render={(routeProps) => <Article {...this.props} {...routeProps} />}/>
+          <Route path="/article/:id" render={(routeProps) => <Article {...passThroughProps} {...routeProps} />}/>
           <Route exact path="/" component={Index} />
         </>
       </Router>
@@ -19,28 +21,50 @@ export class Main extends React.Component {
   }
 }
 
+
 const MainStyle = styled.div`
   grid-area: Main;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 class Article extends React.Component {
 
+  handleBeforePage = () => {
+    const { id } = this.props.match.params; 
+    this.props.changeValue(`search at article #${id-1}`);
+    this.props.history.push(`/article/${id-1}`);
+  }
+
+  handleNextPage = () => {
+    const { id } = this.props.match.params; 
+    this.props.changeValue(`search at article #${parseInt(id)+1}`);
+    this.props.history.push(`/article/${parseInt(id)+1}`);
+  }
+
   render(){
     const { id } = this.props.match.params; 
-    console.log(id);
     return (
       <MainStyle>
-        this is main
+        This page is {id}
+        <Button onClick={this.handleBeforePage}>BEFORE PAGE</Button>
+        <Button onClick={this.handleNextPage}>NEXT PAGE</Button>
       </MainStyle>
     );
   }
 }
 
 const Index = (props) => {
+
+  const handleClick = (to) => () => {
+    props.history.push(to);
+  }
+  
   return (
     <div style={{display: "flex", flexDirection:"column", alignItems: "center"}}>
       Article List
-      <Button style={{marginTop: "24px"}}>
+      <Button style={{marginTop: "24px"}} onClick={handleClick("/article/0")}>
         goto article
       </Button>
     </div>
@@ -62,4 +86,7 @@ const Button = styled.div`
   }
   transition: all 0.15s ease-out;
 `;
+
+// transition: [css프로퍼티 종류 예를들어서 background, color, width, .... 다 퉁치면 all]  [시간] [이징함수(타이밍 함수)]
+
 
