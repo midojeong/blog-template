@@ -38,25 +38,35 @@ const SomeAlert = (msg) => () => {
   alert(msg);
 };
 
+const SearchBar = styled.input`
+`;
+
 class App extends Component {
 
   componentDidMount() {
 
   }
 
-  handleClickLogo = () => {
+  handleClickLogo = (e) => {
+    console.log(e);
     alert("Logo Clicked");
+  }
+
+  handleChange = (e) => {
+    console.log(e.target.value);
   }
   
   render() {
     return (
       <Container>
         <Header>
-          <div style={{gridArea: "Logo", ...centeredFlex, cursor: "pointer", borderRight: basicBorder}} onClick={this.handleClickLogo}>
+          <div
+            style={{gridArea: "Logo", ...centeredFlex, cursor: "pointer", borderRight: basicBorder}}
+            onClick={this.handleClickLogo}>
             logo
           </div>
           <div style={{gridArea: "Search"}}>
-            search
+            <SearchBar onChange={this.handleChange} />
           </div>
           <div style={{gridArea: "Login"}}>
             login
