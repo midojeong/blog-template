@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+import { Main, Sidebar } from "./components";
 
 const centeredFlex = {
   display: "flex",
@@ -28,21 +29,12 @@ const Header = styled.div`
   grid-template-columns: 260px 1fr 300px;
 `;
 
-const Main = styled.div`
-  grid-area: Main;
-`;
-
-const Sidebar = styled.div`
-  grid-area: Sidebar;
-  border-right: 1px solid rgba(22,27,72,0.2);
-`;
-
 const Footer = styled.div`
   grid-area: Footer;
 
 `;
 
-const SomeAlert = (msg) => {
+const SomeAlert = (msg) => () => {
   alert(msg);
 };
 
@@ -70,9 +62,9 @@ class App extends Component {
             login
           </div>
         </Header>
-        <Main>
+        <Main a="1" b="2" c={SomeAlert}>
         </Main>
-        <Sidebar>
+        <Sidebar sae="hun" hoo="chi">
         </Sidebar>
         <Footer>
         </Footer>
