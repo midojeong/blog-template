@@ -47,13 +47,16 @@ class App extends Component {
 
   }
 
+  state = {
+    value: "default value",
+  }
+
   handleClickLogo = (e) => {
-    console.log(e);
     alert("Logo Clicked");
   }
 
   handleChange = (e) => {
-    console.log(e.target.value);
+    this.setState({value : e.target.value});
   }
   
   render() {
@@ -66,7 +69,7 @@ class App extends Component {
             logo
           </div>
           <div style={{gridArea: "Search"}}>
-            <SearchBar onChange={this.handleChange} />
+            <SearchBar onChange={this.handleChange} value={this.state.value} />
           </div>
           <div style={{gridArea: "Login"}}>
             login
