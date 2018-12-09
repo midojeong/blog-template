@@ -1,10 +1,82 @@
 import React, { Component } from 'react';
+import styled from "styled-components";
+
+const centeredFlex = {
+  display: "flex",
+  alignItems:"center",
+  justifyContent:"center",
+};
+
+const basicBorder = "1px solid rgba(22,27,72,0.2)"
+
+const Container = styled.div`
+  display: grid;
+  width: 100%;
+  min-height: 100vh;
+  grid-template-columns: 260px 1fr 1fr;
+  grid-template-rows: 60px 1fr 60px;
+  grid-template-areas: "Header Header Header"
+                      "Sidebar Main Main"
+                      "Sidebar Footer Footer";
+`;
+
+const Header = styled.div`
+  grid-area: Header;
+  display: grid;
+  border-bottom: 1px solid rgba(22,27,72,0.2);
+  grid-template-areas: "Logo Search Login";
+  grid-template-columns: 260px 1fr 300px;
+`;
+
+const Main = styled.div`
+  grid-area: Main;
+`;
+
+const Sidebar = styled.div`
+  grid-area: Sidebar;
+  border-right: 1px solid rgba(22,27,72,0.2);
+`;
+
+const Footer = styled.div`
+  grid-area: Footer;
+
+`;
+
+const SomeAlert = (msg) => {
+  alert(msg);
+};
 
 class App extends Component {
+
+  componentDidMount() {
+
+  }
+
+  handleClickLogo = () => {
+    alert("Logo Clicked");
+  }
+  
   render() {
     return (
-      <div>
-      </div>
+      <Container>
+        <Header>
+          <div style={{gridArea: "Logo", ...centeredFlex, cursor: "pointer", borderRight: basicBorder}} onClick={this.handleClickLogo}>
+            logo
+          </div>
+          <div style={{gridArea: "Search"}}>
+            search
+          </div>
+          <div style={{gridArea: "Login"}}>
+            login
+          </div>
+        </Header>
+        <Main>
+        </Main>
+        <Sidebar>
+        </Sidebar>
+        <Footer>
+        </Footer>
+      </Container>
     );
   }
 }
